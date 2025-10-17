@@ -61,3 +61,12 @@ for i in range(100):
     if i % 20 == 0: print(f"Step {i}, Loss: {loss.item():.3f}")
 
 print("🎉 MINI GPT BUILT IN 50 LINES! INSIDE MODEL, OUTSIDE DECODER ✓")
+
+# GENERATION! (3 LINES)
+print("\n� YOUR GPT GENERATING...")
+x = torch.tensor([[50]]).cuda() if torch.cuda.is_available() else torch.tensor([[50]])  # Start token
+for _ in range(15):  # Generate 15 words
+    logit = model(x)
+    next_token = torch.argmax(logit).unsqueeze(0)
+    x = torch.cat([x, next_token.unsqueeze(1)], dim=1)
+print("Generated sequence:", x[0].tolist())  # [50, 72, 91, 23, ...]
