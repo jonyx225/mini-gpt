@@ -51,9 +51,9 @@ class MultiHeadAttention(nn.Module):
         return self.w_o(y)
 
 # TRAINING (5 LINES!)
-model = MiniGPT().cuda()
+model = MiniGPT()
 optim = torch.optim.AdamW(model.parameters(), lr=1e-3)
-data = torch.randint(0, 100, (1000, 8)).cuda()  # FAKE TEXT
+data = torch.randint(0, 100, (1000, 8))  # FAKE TEXT
 for i in range(100):
     logits = model(data[:, :-1])
     loss = F.cross_entropy(logits, data[:, -1])
